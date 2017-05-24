@@ -1,0 +1,48 @@
+.card {
+ background: rgba(255, 255, 255, 0.9);
+ border-radius:5px;
+ box-shadow:0 2px 5px #ccc;
+ width:230px;
+ margin-left: 25px;
+ margin-bottom: 25px;
+}
+.card-line{
+ border-top:1px solid #eee;
+}
+.card-img {
+ border-radius:5px 5px 0 0;
+ height:auto;
+ max-width:100%;
+}
+.card-text {
+ color:#777;
+ font-size:12px;
+ line-height:1.5;
+ text-align:center;
+ margin:8px;
+}
+.card-title {
+ -webkit-box-orient:vertical;
+ -webkit-line-clamp:1;
+ color:#333;
+ display:-webkit-box;
+ font-size:14px;
+ overflow:hidden;
+ position:relative;
+ text-align:center;
+ text-overflow:ellipsis;
+ word-wrap:break-word;
+ margin:8px;
+}
+/*荳�逡ｪ荳九�ｮ鬟滓攝蜷�*/
+.card-info{
+	background-color: #ffc040;
+	border-radius: 30px;
+	width:50%;
+	text-align:center;
+	margin: 0 auto;
+}
+.card-food-name{
+	color: white;
+}
+

@@ -1,0 +1,39 @@
+*{<meta charset="utf-8">}*
+#{extends 'MainController/homeFrame.html' /}
+#{stylesheet 'personalForm.css' /}
+#{stylesheet 'recipe-card.css' /}
+#{stylesheet 'commonGroup.css' /}
+#{script 'jquery.js' /}
+#{script 'foodstuffAdd.js' /}
+
+<div id="group-content">
+<ul>
+	<h4>Invite Users</h4>
+	${joined == false ? '' : '入力された名前のユーザーは既にこのグループに参加または招待済みです。'}
+	${existName == true ? '' : '入力されたユーザーは存在しません。'}<br>
+	<br>
+	<form action="@{GroupController.addUserToGroup(userName)}" method="post">
+		<ul>
+			Group Name: ${groupName}
+			<input type="hidden" name="groupName" value="${groupName}" /><br>
+			<input type="hidden" name="id" value="${id}" /><br>
+		</ul>
+		<ul>
+			User : 
+			<input type="text" name="userID" required  />
+			<input type="submit" value="Invite">
+		</ul><br>
+	</form>
+</ul>
+<ul>
+	<h4>${numUnjoined == 0 ? '' : 'Invited Users'}</h4>
+	<ul>
+		#{list items: RelationList, as: 'r'}
+			${r.userID}<br>
+		#{/list}
+	</ul>
+</ul>
+<ul><form action="@{GroupController.groupEdition(numGroup, userName, groupName, id, false, true)}" method="post">
+	<br><input type="submit" value="Complete">
+</form></ul>
+</div>

@@ -1,0 +1,121 @@
+﻿*{<meta charset="utf-8">}*
+#{extends 'MainController/homeFrame.html' /}
+#{stylesheet 'personalForm.css' /}
+#{stylesheet 'recipe-card.css' /}
+#{script 'jquery.js' /}
+#{script 'foodstuffAdd.js' /}
+<div id="doLayout">
+  <div class="left">
+    <div id="foodstuffAddForm" class="fafClearfix">
+      <form name="foodstuffAddForm" action="#" method="post" onLoad="clearForm();">
+        <input type="hidden" name="fafEditFlg" value="false">
+        <!-- falseなら新規追加。更新処理の場合はその食材のIDが入る -->
+        <div id="fafInputForm">
+          <!-- クリアボタン -->
+          <button type="button" title="入力内容をクリアする" onclick="clearForm()" class="deleteButton">CLEAR</button>
+          <!-- 送信ボタン -->
+          <button type="button" title="食材を追加する" onclick="addFoodstuff()" class="addButton">ADD</button>
+          <p id="fafLine1">
+            <span>Food　</span>
+            <!-- 食材カテゴリ選択のセレクトボックス -->
+            <select name="fafSelectCategory" id="fafSelectCategory" onChange="changeCategory()">
+              #{list items:categories, as:'category'} 
+                <option value="${category_index}">${category} </option>
+              #{/list}
+              <option value="-1">直接入力</option>
+            </select>
+            <!-- 食材選択のセレクトボックス -->
+            #{list foodstuffDividedWithCategory, as:'fdwc'}
+              *{初期表示用に最初のセレクトボックスに印をつける}*
+              #{if fdwc_index == 1} 
+                <select name="fafSelectFoodstuff_${fdwc_index}" class="fafSelectFoodstuffBoxes" id="fafSelectFoodstuff_first">
+              #{/if}#{else}
+                <select name="fafSelectFoodstuff_${fdwc_index}" class="fafSelectFoodstuffBoxes">
+              #{/else}
+              #{list items:fdwc, as:'fs'} 
+                <option value="${fs.id}">${fs.foodName} </option>
+              #{/list}
+              </select>
+            #{/list} 
+            <!-- 食材名入力のテキストボックス。その他選択時のみ表示 -->
+            <input type="text" name="fafFoodstuffName" id="fafFoodstuffName">
+          </p>
+          <p id="fafLine2">
+            <!-- 期限の入力 -->
+            <span>Deadline　</span>
+            <input type="date" name="fafBestBefore" value="${tomollow}">
+            *{初期値は翌日。+1日、1週間、1ヶ月のボタンとか作る余裕があれば作りたい}* 
+            <button type="button" name="fafBBButton1" value="1" class="fafBBButtons" onclick="plusDate(1)">+1D</button>
+            <button type="button" name="fafBBButton1" value="7" class="fafBBButtons" onclick="plusDate(7)">+1W</button>
+            <button type="button" name="fafBBButton1" value="32" class="fafBBButtons" onclick="plusDate(32)">+1M</button>
+            <!-- <wbr> -->
+            <span id="fafAmountLab">　Amount　</span>
+            <input type="text" name="fafAmount">
+          </p>
+          <p id="fafLine3">
+            <span>View in Group?：</span>
+            <input type="radio" name="fafToGroup" value="1" checked>Yes
+            <input type="radio" name="fafToGroup" value="0">No
+          </p>
+        </div>
+         
+      </form>
+    </div>
+    <div id="refrigerator" class="fafClearfix">
+      <ul id="refUl">
+        <!-- 改行や半角スペースがあるとwidthの合計を100%にした時にレイアウトが崩れる原因になるらしいので改行はコメントアウト -->
+        <li class="refFoodstuffs" id="refLiHead"><!--
+      --><span class="refCategory">Category</span><!--
+      --><span class="refFood">Food</span><!--
+      --><span class="refAmount">Amount</span><!--
+      --><span class="refBestbefore">Deadline</span><!--
+      --><span class="refButtons">Edit/Delete</span><!--
+    --></li>
+        <!-- 食材一覧の生成 -->
+        #{list items:foods, as:'food'} 
+          <li class="refFoodstuffs" id="refFoodstuffs_${food.id}"><!--
+        -->#{if categoryToIcon.containsKey( fdbIdToCategory.get(food.foodDatabaseId).category )}<!--
+          --><span class="refCategory"><img src="/public/images/categoryIcons/${categoryToIcon.get(fdbIdToCategory.get(food.foodDatabaseId).category)}.png" alt="${fdbIdToCategory.get(food.foodDatabaseId).category}"　class="refCategoryIcon"></span><!--
+        -->#{/if}<!--
+        -->#{else}<span class="refCategory">${fdbIdToCategory.get(food.foodDatabaseId).category}</span>#{/else}<!--
+        --><span class="refFood">${food.foodName}</span><!--
+        --><span class="refAmount">${food.amount}</span><!--
+        -->#{if food.bestBeforeDate < today}<span class="refBestbefore refDanger">${food.bestBeforeDate}</span>#{/if}<!--
+        -->#{else}<!--
+          -->#{if food.bestBeforeDate < threeDays}<span class="refBestbefore refWarning">${food.bestBeforeDate}</span>#{/if}<!--
+          -->#{else}<span class="refBestbefore">${food.bestBeforeDate}</span>#{/else}<!--
+        -->#{/else}<!--
+        --><span class="refButtons"><!--
+          --><form action="#" method="POST"><!--
+            --><input type="hidden" name="refFoodId" value="${food.id}"><!--
+            --><input type="hidden" name="refRakutenId" class="refRakutenId" value="${fdbIdToCategory.get(food.foodDatabaseId).rakutenId}"><!--
+            --><input type="hidden" name="refToGroup" id="refToGroup_${food.id}" value="${food.toGroup}"><!--
+            --><button type="button" onclick="editFoodstuff('${food.id}')">Edit</button><!-- 
+                    --><button type="button" onclick="deleteFoodstuff('${food.id}', '${food.foodName}')">✕</button><!--
+          --></form><!--
+        --></span><!--
+      --></li>
+    #{/list} 
+      </ul>
+    </div>
+  </div>
+  <div class="right">
+  #{list items: cardList, as: 'card'} 
+    <div class="card right">
+      <img class="card-img ${card}" src="http://dictionary.xgoo.jp/img/daijisen/ref/104880.jpg" alt="">
+      <div class="card-content">
+        <a class="card-title ${card}" target="_blank"></a>
+        <div class="card-line"></div>
+        <div class="card-text ${card}"></div>
+      </div>
+      <div class="card-line"></div>
+      <div class="card-info">
+        <div class="card-text card-food-name ${card}"></div>
+      </div>
+    </div>
+   #{/list} 
+    <form>
+      <input id="recipe" type="hidden" value="レシピApiたたく" />
+    </form>
+  </div>
+</div>

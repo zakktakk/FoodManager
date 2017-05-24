@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>食マネ！</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" type="text/css" href="@{'/public/bootstrap/css/bootstrap.min.css'}"></link>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="@{'/public/bootstrap/css/sb-admin.css'}"></link>
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" type="text/css" href="@{'/public/bootstrap/css/font-awesome.min.css'}"></link>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesnt work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-original navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+            
+             <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu message-dropdown">
+                     %{
+                    if(!(unjoined == null)){
+                    if(unjoined.size()==0){
+                    }%
+                     <li class="message-preview">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <strong>No Invite</strong>
+                                        </h5>
+                                   </div>
+                                </div>
+                            </a>
+                        </li>
+                    %{
+                    }else{
+                    }%
+                    
+                    %{
+                    for(int i = 0;i < unjoined.size() ;i++){
+                    }%
+                        <li class="message-preview">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <strong>Invite to "${unjoined.get(i)[1]}" Group</strong>
+                                        </h5>
+                                        <a href = "/MainController/acceptInvite?id=${unjoined.get(i)[0]}" class="btn btn-primary">Join</a>
+                                        <a href = "/MainController/denyInvite?id=${unjoined.get(i)[0]}" class="btn btn-primary")>Reject</a>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                     %{
+                    }}}
+                    }%
+                    </ul>
+                </li>
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> ${userName} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/deleteAccount"><i class="fa fa-fw fa-thumbs-o-down"></i> Delete Account</a>
+                        </li>
+                        <li>
+                            <a href="/changePassword"><i class="fa fa-fw fa-gear"></i> Change Pass</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href = "@{UserController.logout()}"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                <!-- site-titleはbootstrapにありそうだからsite-name -->
+                    <li><a class="site-name" href="/homeFrame">食マネ!</a></li>
+                      %{
+                      if(page == 0){
+                      }%
+                    <li id= "kokoniiruyo">
+                    %{
+                    }else{
+                    }%
+                    <li>
+                    %{}}%
+                        <a href="/MainController/homeFrame?page_num=0"><i class="fa fa-fw fa-smile-o"></i> ${userName}'s Page</a>
+                    </li>
+                     %{
+                    if(!(GroupList == null)){
+                    }%
+                    %{
+                    for(int i = 1;i <= GroupList.size() ;i++){
+                    }%
+                    %{
+                    if(page == i){
+                    }%
+                    <li id= "kokoniiruyo">
+                    %{
+                    }else{
+                    }%
+                    <li>
+                    %{}}%
+                        <a href="/MainController/homeFrame?page_num=${i}&groupID=${GroupList.get(i-1)[0]}"><i class="fa fa-fw fa-bug"></i> ${GroupList.get(i-1)[1]}　Group Page</a>
+                    </li>
+                    %{}}}%
+                    
+                      %{if(page == -1){}%
+                    <li id= "kokoniiruyo">
+                    %{}else{}%
+                    <li>
+                    %{}}%
+                        <a href="/MainController/homeFrame?page_num=-1"><i class="fa fa-fw fa-plus-square"></i>Make Group</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                        %{if(page == 0){}%
+                            HOME&nbsp;&nbsp;
+                            <small><i class="fa fa-fw fa-smile-o"></i>${userName}&nbsp;</small>
+                        %{}}%
+                        %{if(page == -1){}%
+                            Make New Group&nbsp;&nbsp;
+                            <small><i class="fa fa-fw fa-smile-o"></i>Edit Member&nbsp;</small>
+                        %{}}%
+                        %{if(page > 0){}%
+                            ${GroupList.get(page-1)[1]}'s Page&nbsp;&nbsp;
+                            %{
+                            userList = GroupMap.get(GroupList.get(page-1)[1]);
+                            for(int i = 0;i < userList.size() ;i++){}%
+                            <small><i class="fa fa-fw fa-smile-o"></i>${userList.get(i)}&nbsp;</small>
+                            %{}}%
+                        %{}}%
+                        </h1>
+                        </h4>
+                    </div>
+                </div><!-- /.row -->
+                <div id="dolayout">#{doLayout /}</div>
+            </div><!-- /.container-fluid -->
+        </div><!-- /#page-wrapper -->
+    </div><!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src= "@{'/public/javascripts/jquery.js'}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="@{'/public/javascripts/bootstrap.min.js'}"></script>
+</body>
+
+</html>

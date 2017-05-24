@@ -1,0 +1,111 @@
+*{<meta charset="utf-8">}*
+#{extends 'MainController/homeFrame.html' /}
+#{stylesheet 'personalForm.css' /}
+#{stylesheet 'recipe-card.css' /}
+#{stylesheet 'commonGroup.css' /}
+#{script 'jquery.js' /}
+#{script 'foodstuffAdd.js' /}
+
+
+<div class="left">
+<div id="group-content">
+<ul>
+    <h4><strong>Add Member</strong></h4>
+    ${joined == false ? '' : '入力されたユーザーは既にこのグループに参加または招待済みです。'}
+    ${existName == true ? '' : '入力されたユーザーは存在しません。'}<br>
+    <form action="@{GroupController.addNewUser(page, userName)}" method="post">
+		<input type="hidden" name="id" value=${id} />
+		<input type="hidden" name="groupName" value=${groupName} />
+		User Name :
+		<input type="text" name="userID" required />
+		<input type="submit" value="Add" />
+    </form>
+    
+	<br>
+	<h4><strong>${numJoined == 0 ? '' : 'Ban Members'}</strong></h4>
+	#{list items: joinedList, as: 'j'}
+	<form action="@{GroupController.remove(page, userName)}" method="post">
+		<table width="500">
+			<tr><td><i class="fa fa-fw fa-smile-o"></i>${j.userID}</td>
+			<td>
+				<input type="hidden" name="id" value=${id} />
+				<input type="hidden" name="groupName" value=${groupName} />
+				<input type="hidden" name="userID" value=${j.userID} />
+				<input type="submit" value="Ban">
+			</td></tr>
+		</table>
+	</form>
+	#{/list}
+
+	<br>
+	<h4><strong>${numUnjoined == 0 ? '' : 'Users Inviting'}</strong></h4>
+	#{list items: unjoinedList, as: 'u'}
+		<i class="fa fa-fw fa-smile-o"></i>${u.userID}<br>
+	#{/list}
+
+	<br>
+	<h4><strong>Leave Group</strong></h4>
+	<form action="@{GroupController.remove(page, userName)}" method="post">
+		<input type="hidden" name="id" value=${id} />
+		<input type="hidden" name="groupName" value=${groupName} />
+		<input type="hidden" name="userID" value=${userName} />
+		<input type="submit" value="Leave"><br>
+	</form>
+
+</ul>
+</div><!-- div:group-content end -->
+
+*{--- 以下冷蔵庫 追加by谷川 ---}*
+		<div id="refrigerator" class="fafClearfix">
+	  <ul id="refUl">
+	    <!-- 改行や半角スペースがあるとwidthの合計を100%にした時にレイアウトが崩れる原因になるらしいので改行はコメントアウト -->
+	    <li class="refFoodstuffs" id="refLiHead"><!--
+			--><span class="refCategory">カテゴリ</span><!--
+			--><span class="refFood">食材名</span><!--
+			--><span class="refAmount">量</span><!--
+			--><span class="refBestbefore">使用期限</span><!--
+			--><span class="refButtons">持ち主</span><!--
+		--></li>
+	    <!-- 食材一覧の生成 -->
+	    #{list items:foods, as:'food'} 
+	    	<li class="refFoodstuffs" id="refFoodstuffs_${food.id}"><!--
+				-->#{if categoryToIcon.containsKey( fdbIdToCategory.get(food.foodDatabaseId).category )}<!--
+					--><span class="refCategory"><img src="/public/images/categoryIcons/${categoryToIcon.get(fdbIdToCategory.get(food.foodDatabaseId).category)}.png" alt="${fdbIdToCategory.get(food.foodDatabaseId).category}"　class="refCategoryIcon"></span><!--
+				-->#{/if}<!--
+				-->#{else}<span class="refCategory">${fdbIdToCategory.get(food.foodDatabaseId).category}</span>#{/else}<!--
+				--><span class="refFood">${food.foodName}</span><!--
+				--><span class="refAmount">${food.amount}</span><!--
+				-->#{if food.bestBeforeDate < threeDays}<span class="refBestbefore refWarning">${food.bestBeforeDate}</span>#{/if}<!--
+				-->#{else}<span class="refBestbefore">${food.bestBeforeDate}</span>#{/else}<!--
+				--><span class="refUser">${userIdToName.get(food.userId)}</span><!--
+				--><span class="refHidden"><!--
+					--><form action="#" method="POST"><!--
+						--><input type="hidden" name="refRakutenId" class="refRakutenId" value="${fdbIdToCategory.get(food.foodDatabaseId).rakutenId}"><!--
+					--></form><!--
+				--></span><!--
+			--></li>
+		#{/list} 
+	  </ul>
+	</div>
+*{--- 以上冷蔵庫 ---}*
+</div><!-- div:left end -->
+
+*{--- 以下レシピ ---}*
+<div class="right">
+  #{list items: cardList, as: 'card'} 
+    <section class="card right">
+      <img class="card-img ${card}" src="http://dictionary.xgoo.jp/img/daijisen/ref/104880.jpg" alt="">
+      <div class="card-content">
+        <a class="card-title ${card}" target="_blank"></a>
+        <p class="card-text ${card}"></p>
+      </div>
+      <div class="card-info">
+        <p class="card-text card-food-name ${card}"></p>
+      </div>
+    </section>
+   #{/list} 
+    <form>
+      <input id="recipe" type="hidden" value="レシピApiたたく" />
+    </form>
+  </div>
+*{--- 以上レシピ ---}*

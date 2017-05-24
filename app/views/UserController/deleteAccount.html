@@ -1,0 +1,46 @@
+*{<meta charset="utf-8">}*
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-JP" xml:lang="ja-JP">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="@{'/public/bootstrap/css/bootstrap.css'}"></link>
+  <link rel="stylesheet" type="text/css" href="@{'/public/bootstrap/css/bootstrap-theme.min.css'}"></link>
+  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/signin.css'}"></link>
+  <link meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>食マネ！</title>
+</head>
+<body>
+<h2>食マネ！</h2>
+ #{if deletefailed.equals("true")}
+<p class = "path"><font size = "2">**ユーザー名とパスワードが一致しません**</font></p>
+#{/if}
+
+<form action="@{deleteAnAcount}" method="post" id="delete">
+<div class="container">
+<div class="form-login">
+<h3>Delete Accnount</h3>
+<input type="password" name="password" class="form-control input-sm" required placeholder="Password" />
+<br>
+<div class="wrapper">
+<span class="group-btn">
+<!-- <input type="submit" class="btn btn-primary btn-md" value = "変更"> -->
+<button type = "button" class="btn btn-primary btn-md" onclick= "disp()">Delete</button>
+</span>
+</div>
+</div>
+</div>
+</form>
+
+<p class = "path"><font size = "1"><a href="../MainController/homeframe">もどる</a></font></p>
+</body>
+<script type="text/javascript">
+<!--
+function disp(){
+  var frm = document.getElementById("delete");
+  if(window.confirm("まじでアカウント削除していい？")){
+    frm.submit();
+  }
+}
+-->
+</script>
+</html>

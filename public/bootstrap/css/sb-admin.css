@@ -1,0 +1,396 @@
+ /*!
+ * Start Bootstrap - SB Admin Bootstrap Admin Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+*{
+  /*ボタンを押した後回りが青くなる現象なくす*/
+  outline: none;
+}
+
+/* Global Styles */
+body {
+    margin-top: 100px;
+    background-image: url('/public/images/table.png');
+    z-index: 1;
+    /*background-size: cover;*/
+}
+
+@media(min-width:768px) {
+  body {
+    margin-top: 50px;
+  }
+}
+
+/*一番外側*/
+#wrapper {
+  width: 100%;
+  padding-left: 0;
+  background:rgba(0,0,0,0.2);
+}
+
+/*真ん中*/
+#page-wrapper {
+  padding: 0;
+  width: 100%;
+}
+
+@media(min-width:768px) {
+  #wrapper {
+  }
+
+  #page-wrapper {
+    width: 100%;
+    padding: 0;
+    /*background-image: url('/public/images/table.png');*/
+    /*background:rgba(0,0,0,0.3);*/
+    background-attachment: fixed;
+  }
+}
+
+.huge {
+  font-size: 50px;
+  line-height: normal;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 225px;
+    }
+    #page-wrapper {
+        padding: 10px;
+    }
+}
+
+/* Top Navigation */
+.top-nav {
+  padding: 0 15px;
+}
+
+.top-nav>li {
+  display: inline-block;
+  float: left;
+}
+
+.top-nav>li>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    line-height: 20px;
+    color: #fff;
+}
+
+.top-nav>li>a:hover,
+.top-nav>li>a:focus,
+.top-nav>.open>a,
+.top-nav>.open>a:hover,
+.top-nav>.open>a:focus {
+    color: #fff;
+    /*最上部ヘッダーの右上アイコンの色とホバー時背景色*/
+    background-color: #000;
+}
+
+.top-nav>.open>.dropdown-menu {
+    float: left;
+    position: absolute;
+    margin-top: 0;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #fff;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.top-nav>.open>.dropdown-menu>li>a {
+  white-space: normal;
+}
+
+ul.message-dropdown {
+  padding: 0;
+  max-height: 250px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+li.message-preview {
+    width: 275px;
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
+}
+
+li.message-preview>a {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+li.message-footer {
+  margin: 5px 0;
+}
+
+ul.alert-dropdown {
+  width: 200px;
+}
+
+
+/* Side Navigation */
+@media(min-width:768px) {
+    .side-nav {
+        position: fixed;
+        /*最上部のヘッダーのスペース消す 元は51px*/
+        top: 0px;
+        left: 225px;
+        width: 225px;
+        margin-left: -225px;
+        border: none;
+        border-radius: 0;
+        overflow-y: auto;
+        /*サイドバー背景色*/
+        background: rgba(0,0,0,1);
+        bottom: 0;
+        overflow-x: hidden;
+        padding-bottom: 40px;
+    }
+    .side-nav>li>a {
+        width: 225px;
+    }
+    .side-nav li a:hover,
+    .side-nav li a:focus {
+        outline: none;
+        background-color: #fffafa !important;
+    }
+}
+
+#kokoniiruyo {
+    background-color: #f7f3e8;
+}
+
+.side-nav>li>ul {
+  padding: 0;
+}
+
+.side-nav>li>ul>li>a {
+  display: block;
+  padding: 10px 15px 10px 38px;
+  text-decoration: none;
+  color: #999;
+}
+
+.side-nav>li>ul>li>a:hover {
+  color: #fff;
+}
+
+
+/* Flot Chart Containers */
+
+.flot-chart {
+  display: block;
+  height: 400px;
+}
+
+.flot-chart-content {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Custom Colored Panels */
+
+.huge {
+  font-size: 40px;
+}
+
+.panel-green {
+  border-color: #5cb85c;
+}
+
+.panel-green > .panel-heading {
+  border-color: #5cb85c;
+  color: #fff;
+  background-color: #5cb85c;
+}
+
+.panel-green > a {
+  color: #5cb85c;
+}
+
+.panel-green > a:hover {
+  color: #3d8b3d;
+}
+
+.panel-red {
+  border-color: #d9534f;
+}
+
+.panel-red > .panel-heading {
+  border-color: #d9534f;
+  color: #fff;
+  background-color: #d9534f;
+}
+
+.panel-red > a {
+  color: #d9534f;
+}
+
+.panel-red > a:hover {
+  color: #b52b27;
+}
+
+.panel-yellow {
+  border-color: #f0ad4e;
+}
+
+.panel-yellow > .panel-heading {
+  border-color: #f0ad4e;
+  color: #fff;
+  background-color: #f0ad4e;
+}
+
+.panel-yellow > a {
+  color: #f0ad4e;
+}
+
+.panel-yellow > a:hover {
+  color: #df8a13;
+}
+
+
+/*画面最上部ヘッダー*/
+
+.navbar-original {
+    /*トップヘッダーバー背景色*/
+    /*background: rgba(0,0,0, 0.7);*/
+    background:rgba(0,0,0,0.2);
+    border-bottom: none;
+}
+
+.navbar-original .site-title {
+    color: #fff;
+
+}
+
+.navbar-original .site-title:hover,
+.navbar-original .site-title:focus {
+    color: #5e5e5e;
+    background-color: transparent;
+}
+
+.navbar-original .navbar-text {
+    color: #777;
+}
+
+.navbar-original .navbar-nav > li > a {
+    color: #777;
+}
+
+.navbar-original .navbar-nav > li > a:hover,
+.navbar-original .navbar-nav > li > a:focus {
+    color: #333;
+    background-color: transparent;
+}
+
+.navbar-original .navbar-nav > .active > a,
+.navbar-original .navbar-nav > .active > a:hover,
+.navbar-original .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #e7e7e7;
+}
+
+.navbar-original .navbar-nav > .disabled > a,
+.navbar-original .navbar-nav > .disabled > a:hover,
+.navbar-original .navbar-nav > .disabled > a:focus {
+    color: #ccc;
+    background-color: transparent;
+}
+
+.navbar-original .navbar-toggle {
+    border-color: #ddd;
+}
+
+.navbar-original .navbar-toggle:hover,
+.navbar-original .navbar-toggle:focus {
+    background-color: #ddd;
+}
+
+.navbar-original .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+
+.navbar-original .navbar-collapse,
+.navbar-original .navbar-form {
+    border-color: #e7e7e7;
+}
+
+.navbar-original .navbar-nav > .open > a,
+.navbar-original .navbar-nav > .open > a:hover,
+.navbar-original .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #e7e7e7;
+}
+
+@media (max-width: 767px) {
+    .navbar-original .navbar-nav .open .dropdown-menu > li > a {
+        color: #777;
+    }
+    .navbar-original .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-original .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #333;
+        background-color: transparent;
+    }
+    .navbar-original .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-original .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-original .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #555;
+        background-color: #e7e7e7;
+    }
+    .navbar-original .navbar-nav .open .dropdown-menu > .disabled > a,
+    .navbar-original .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+    .navbar-original .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+        color: #ccc;
+        background-color: transparent;
+    }
+}
+
+.navbar-original .navbar-link {
+    color: #777;
+}
+
+.navbar-original .navbar-link:hover {
+    color: #333;
+}
+
+.navbar-original .btn-link {
+    color: #777;
+}
+
+.navbar-original .btn-link:hover,
+.navbar-original .btn-link:focus {
+    color: #333;
+}
+
+.navbar-original .btn-link[disabled]:hover,
+fieldset[disabled] .navbar-original .btn-link:hover,
+.navbar-original .btn-link[disabled]:focus,
+fieldset[disabled] .navbar-original .btn-link:focus {
+    color: #ccc;
+}
+
+
+/*コンテンツ(dolayout)の上のヘッダー*/
+
+.page-header {
+    text-align: center;
+    color: white;
+    border-bottom: none;
+}
+
+.page-header>small{
+  color: white;
+}
+
+.site-name {
+    border: none;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    font-family: Helvetica, Arial, sans-serif;
+}

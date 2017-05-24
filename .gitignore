@@ -1,0 +1,13 @@
+/bin
+/db/*
+/logs/*
+/tmp/*
+/test-result
+.DS_Store
+._*
+*~
+# for eclipse
+/eclipse
+.classpath
+.project
+.settings

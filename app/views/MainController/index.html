@@ -1,0 +1,47 @@
+*{<meta charset="utf-8">}*
+#{extends 'Application/main.html' /}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-JP" xml:lang="ja-JP">
+<head>
+#{if message.equals("true")}
+<meta http-equiv="refresh" content="3;URL=http://localhost:9001/maincontroller/homeframe">
+#{/if}
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="@{'/public/bootstrap/css/bootstrap.css'}"></link>
+  <link rel="stylesheet" type="text/css" href="@{'/public/bootstrap/css/bootstrap-theme.min.css'}"></link>
+  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/signin.css'}"></link>
+  <link meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>食マネ！</title>
+</head>
+<body>
+<h2>食マネ！</h2>
+ #{if message.equals("true")}
+<p class = "path">すでにログインされています3秒後にホーム画面に戻ります</p>
+#{/if}
+#{else}
+ #{if loginfailed.equals("true")}
+ <br>
+<p class = "path"><font size = "2">**ログイン名かパスワードが間違っています**</font></p>
+#{/if}
+
+<form action="@{UserController.checkUserID()}" method="post">
+<div class="container">
+<div class="form-login">
+<h3>Sign in</h3>
+<input type="text" name="userID" id="userID" class="form-control input-sm" required placeholder="User ID" />
+<br>
+<input type="password" name="password" name="password" class="form-control input-sm" required placeholder="Password" />
+<br>
+<div class="wrapper">
+<span class="group-btn">
+<input type="submit" class="btn btn-primary btn-md" value = "Go">
+</span>
+</div>
+</div>
+</div>
+</form>
+<p class = "path"><font size = "1">アカウントを新規作成する方は <a href="createUser">こちら</a></font></p>
+
+#{/else}
+</body>
+</html>

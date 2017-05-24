@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>食マネ！</title>
+</head>
+<body>
+<h1>メンバーをグループに追加</h1>
+<ul>
+  ${joined == false ? '' : '入力された名前のユーザーは既にこのグループに参加または招待済みです。'}
+  ${existGroup == true ? '' : '入力されたグループは存在しません。'}
+  ${existName == true ? '' : '入力されたユーザーは存在しません。'}<br>
+  <br>
+  <form action="@{addNewUser()}" method="post">
+    <ul>
+      グループ名
+      <input type="text" name="groupName" required placeholder="半角英数字" /><br>
+    </ul>
+    <ul>
+      ユーザー名
+      <input type="text" name="userID" /><br>
+    </ul>
+    <p>
+      <input type="submit" />
+    </p>
+  </form>
+  <a href="@{groupMenu()}">グループメニューに戻る</a>
+</ul>
+</body>

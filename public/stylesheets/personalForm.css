@@ -1,0 +1,251 @@
+/*たにかわくん*/
+
+/* 食材登録フォームと冷蔵庫 */
+.left {
+    float:left;
+    width:calc(100% - 255px);
+    min-width:624px;
+}
+
+/* レシピカード */
+.right{
+    float:left;
+    width:255px;
+}
+
+/* float修正 */
+.fafClearfix:after{
+    content:"";
+    clear:both;
+    display:block;
+}
+
+/* foodstuffAddForm */
+#foodstuffAddForm {
+    color: white;
+    /*font-weight: bold;*/
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 1em;
+    border: 1px solid rgba(255,255,255, 0.7);
+    /*フォームエリア内のボタンの位置変更するためにpositino使用 by masakazu*/
+    position: relative;
+    height: 100%;
+}
+
+#foodstuffAddForm *{
+    padding:0;
+    margin:0;
+    outline:none;
+}
+
+#foodstuffAddForm button{
+    background-color: rgba(200,200,200,0.3);
+}
+
+#foodstuffAddForm button:hover{
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* --- Input Form */
+
+select, input{
+    background-color: rgba(0,0,0,0);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+#fafInputForm{
+    /*width:80%;*/
+    height:100%;
+    float:left;
+}
+
+#fafLine1,#fafLine2,#fafLine3{
+    height:33%;
+    white-space:nowrap;
+}
+
+/*TODO:調整必要あり*/
+#fafLine1{
+    margin-bottom: 4px;
+    /*height: 50%;*/
+    margin: 0;
+}
+
+#fafLine2, #fafLine3{
+    margin-top: 15px;
+}
+
+#fafLine1>select, #fafLine2>input{
+    padding-left:5px;
+}
+
+#fafLine2>#fafAmountLab{
+    padding-left:6px;
+}
+
+/*カレンダーの日程変更ボタンのデザイン*/
+#fafLine2>button {
+    padding: 1px 5px;
+    background-color: rgba(0,0,0,0);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* --- Buttons */
+
+/*食材登録フォームの外側のフレームを基準*/
+ .deleteButton{
+    position: absolute;
+/*     top:0;
+    right: 0; */
+    bottom: 0;
+    right: 0;
+    padding-top: 15px;
+    width: 5em;
+    height: 2em;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-bottom: none;
+    border-right: none;
+    /* border-top: none; */
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 100;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(255, 255, 255, 1);
+}
+.deleteButton:hover{
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/*食材登録フォームの外側のフレームを基準*/
+.addButton{
+    position: absolute;
+    bottom: 0;
+    right: 5em;
+    padding-top: 15px;
+    width: 5em;
+    height: 2em;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-bottom: none;
+    border-right: none;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 100;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(255, 255, 255, 1);
+}
+.addButton:hover{
+background-color: rgba(0, 0, 0, 0.8);
+}
+
+#fafInputForm *:disabled{
+    background-color: rgba(128,128,128,0.8);
+}
+
+
+/* カテゴリ関連初期化 */
+#fafFoodstuffName{
+    display:none;
+}
+
+.fafSelectFoodstuffBoxes{
+    display:none;
+}
+
+#fafSelectFoodstuff_first{
+    display:inline-block;
+}
+
+/* Refrigerator */
+
+#refrigerator {
+    padding: 1em;
+    margin-top: 45px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    /*background-color: rgba(76,175,80,0.8);*/
+    /*background-color: rgba(255,255,255,0.8);*/
+    background-color: rgba(0,0,0,0);
+    max-height: 100%;
+}
+#refrigerator ul {
+    list-style-type: none;
+    height: 100%;
+    overflow: auto;
+    padding: 0.5em 1em;
+    /*冷蔵庫の文字色の灰色*/
+    /*color: rgba(170,160,150,1);*/
+    /*color: rgb(0,121,107)*/
+    color: rgba(255,255,255,1);
+
+}
+
+#refrigerator li {
+    width: 100%;
+    height: 2em;
+    margin-bottom: 0.25em;
+    /*冷蔵庫のリストの線border*/
+    /*border-bottom: 1px solid white;*/
+    background-color: rgba(0,0,0,0);
+}
+
+#refrigerator .refCategory{
+    display:inline-block;
+    text-align:center;
+    width:10%;
+}
+#refrigerator img{
+    height:1.5em;
+    width:auto;
+}
+
+#refrigerator .refFood{
+    display:inline-block;
+    text-align:center;
+    width:35%;
+}
+
+#refrigerator .refAmount{
+    display:inline-block;
+    text-align:center;
+    width:20%;
+}
+
+#refrigerator .refBestbefore{
+    display:inline-block;
+    text-align:center;
+    width:20%;
+}
+
+#refrigerator .refButtons{
+    display:inline-block;
+    text-align:center;
+    width:15%;
+}
+
+#refrigerator .refUser{
+    display:inline-block;
+    text-align:center;
+    width:15%;
+}
+
+#refrigerator .refHidden{
+    display:none;
+}
+
+#refrigerator .refButtons button {
+    font-size: 1em;
+    border: 1px solid rgba(255,255,255, 0.9);
+    /*border: 1px solid rgba(0,121,107, 0.9);*/
+    background: rgba(0,0,0,0);
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+#refrigerator .refDanger{
+    color:red;
+    /*font-weight:bold;*/
+}
+
+#refrigerator .refWarning{
+    color:orange;
+    /*font-weight:bold;*/
+}

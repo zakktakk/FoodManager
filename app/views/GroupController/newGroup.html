@@ -1,0 +1,19 @@
+*{<meta charset="utf-8">}*
+#{extends 'MainController/homeFrame.html' /}
+#{stylesheet 'personalForm.css' /}
+#{stylesheet 'recipe-card.css' /}
+#{stylesheet 'commonGroup.css' /}
+#{script 'jquery.js' /}
+#{script 'foodstuffAdd.js' /}
+
+<div id="group-content">
+<ul>
+${existGroup == false ? '' : '入力されたグループ名は既に使用されております。'}<br>
+<br>
+<form action="@{GroupController.addGroupName(page, userName)}" method="post">
+    Group Name
+    <input type="text" name="groupName" required />
+    <input type="submit" value="Next">
+</form>
+</ul>
+</div>
